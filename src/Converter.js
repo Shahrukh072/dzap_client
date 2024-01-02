@@ -43,16 +43,20 @@ const Converter = () => {
   };
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} style={{ padding: '20px', backgroundColor: '#f5f5f5' }}>
       <Grid item xs={12}>
-        <Typography variant="h4" gutterBottom>
-          Crypto Currency Converter
-        </Typography>
+      <Typography variant="h4" gutterBottom style={{ color: 'blue' }}>
+        Crypto Currency Converter
+      </Typography>
       </Grid>
       <Grid item xs={12}>
         <FormControl fullWidth>
           <InputLabel>Select Source Cryptocurrency</InputLabel>
-          <Select value={sourceCrypto} onChange={(e) => setSourceCrypto(e.target.value)}>
+          <Select
+          value={sourceCrypto}
+          onChange={(e) => setSourceCrypto(e.target.value)}
+          style={{ width: '100%', marginTop: '8px' }}
+        >
             {cryptoList.map((crypto) => (
               <MenuItem key={crypto.id} value={crypto.id}>
                 {crypto.name} ({crypto.symbol.toUpperCase()})
@@ -68,6 +72,7 @@ const Converter = () => {
           label="Enter Amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
+          style={{ marginBottom: '16px' }}
         />
       </Grid>
       <Grid item xs={12}>
@@ -81,13 +86,13 @@ const Converter = () => {
         </FormControl>
       </Grid>
       <Grid item xs={12}>
-        <Button variant="contained" color="primary" onClick={handleConvert}>
+        <Button variant="contained" color="primary" onClick={handleConvert}  style={{ backgroundColor: 'blue', color: 'white' }}>
           Convert
         </Button>
       </Grid>
       {error && (
         <Grid item xs={12}>
-          <Typography variant="body1" color="error">
+           <Typography variant="body1" style={{ color: 'red' }}>
             {error}
           </Typography>
         </Grid>
