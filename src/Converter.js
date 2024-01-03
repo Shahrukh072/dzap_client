@@ -15,9 +15,13 @@ const Converter = () => {
   useEffect(() => {
     const fetchCryptoList = async () => {
       try {
-        const response = await axios.get('https://tiny-blue-lion-hose.cyclic.app/cryptocurrencies');
-        setCryptoList(response.data);
-        setSourceCrypto(response.data[0]?.id); 
+        const response = await axios.get('https://tiny-blue-lion-hose.cyclic.app/crypto/cryptocurrencies');
+        if (response.data && response.data.data && Array.isArray(response.data.data)) {
+          setCryptoList(response.data.data);
+          setSourceCrypto(response.data.data[0]?.id);
+        } else {
+          setError('Invalid data format');
+        }
       } catch (error) {
         setError('Error fetching cryptocurrencies');
       }
@@ -28,7 +32,7 @@ const Converter = () => {
 
   const handleConvert = async () => {
     try {
-      const response = await axios.post('https://tiny-blue-lion-hose.cyclic.app/convert', {
+      const response = await axios.post('https://tiny-blue-lion-hose.cyclic.app/crypto/convert', {
         sourceCrypto,
         amount,
         targetCurrency,
